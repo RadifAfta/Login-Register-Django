@@ -1,29 +1,22 @@
 <!-- aplikasi_coba/templates/register.html -->
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
-<body>
-    <div class="container">
-        <h2>Register</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.non_field_errors }}
-            {% for field in form %}
-                <div>
-                    {{ field.label }}<br>
-                    {{ field }}<br>
-                    {{ field.errors }}
-                </div>
-            {% endfor %}
-            <button type="submit">Register</button>
-        </form>
-        <p>Sudah punya akun? <a href="{% url 'login' %}">Login di sini</a>.</p>
-    </div>
-</body>
-</html>
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+    <h2>Register</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {% for field in form %}
+            <div class="form-group">
+                <label>{{ field.label }}</label>
+                {{ field }}
+                <div class="text-danger">{{ field.errors }}</div>
+            </div>
+        {% endfor %}
+        <button type="submit">Register</button>
+    </form>
+    <p>Sudah punya akun? <a href="{% url 'login' %}">Login di sini</a>.</p>
+{% endblock %}
